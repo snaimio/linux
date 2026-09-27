@@ -68,5 +68,5 @@ nvm install --lts
 https://www.gnome-look.org/p/1619506
 Create Two folder on home directory and press Ctrl + H then create .themes & .icons
 
-## 🧑‍💻 Contributors
+## 🧑‍💻 Contributor
 - Sheikh Naim

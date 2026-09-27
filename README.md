@@ -1,7 +1,7 @@
-# Linux Command for First Time Setup
+# Linux Command for First-Time Setup
 
 ## 📝 Why?
-Whenever I install Linux, I need to do this. Sometimes I miss some steps and need to do them again. So I made this repository to ensure everything works fine on a fresh install.
+Every time I install Linux, I need to do this. Sometimes I miss steps and have to repeat them. So I made this repository to ensure everything works fine on a fresh install.
 
 > **Tested on:** Ubuntu 26.04 LTS (Resolute Raccoon) — GNOME 50 / Wayland
 > **Last updated:** September 2026
@@ -84,8 +84,6 @@ sudo apt install gnome-tweaks -y
 sudo apt install gnome-shell-extensions -y
 sudo apt install gnome-shell-extension-manager -y
 ```
-
-> ⚠️ **Note:** On Ubuntu 26.04 (Wayland), `Alt+F2 + r` no longer works. Log out and back in for extension changes to apply.
 
 ### Taskbar app click to minimize
 ```bash
@@ -207,7 +205,7 @@ echo "📦 Installing Flatpak..."
 sudo apt install flatpak -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-echo " Done! Reboot recommended."
+echo "Done! Reboot recommended."
 ```
 
 ---
@@ -223,5 +221,3 @@ echo " Done! Reboot recommended."
 | Install Zsh + Oh My Zsh | `sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"` |
 
 ---
-
-**Tip:** Keep this file in a Git repo (`dotfiles` or `linux-setup`) so you can `git clone` it on any new machine and run the script.

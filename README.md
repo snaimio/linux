@@ -1,7 +1,7 @@
 # Linux Command for First-Time Setup
 
 ## 📝 Why?
-Every time I install Linux, I need to do this. Sometimes I miss steps and have to redo them. So I made this repository to ensure everything works fine on a fresh install.
+Every time I install Linux, I have to repeat the same setup steps. Sometimes I forget one and have to redo the whole process. So I created this repository to make sure every fresh install is set up correctly.
 
 > **Tested on:** Ubuntu 26.04 LTS (Resolute Raccoon) — GNOME 50 / Wayland
 > **Last updated:** September 2026

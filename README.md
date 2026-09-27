@@ -1,7 +1,7 @@
 # Linux Command for First-Time Setup
 
 ## 📝 Why?
-Every time I install Linux, I need to do this. Sometimes I miss steps and have to repeat them. So I made this repository to ensure everything works fine on a fresh install.
+Whenever I install Linux, I need to do this. Sometimes I miss steps and have to redo them. So I made this repository to ensure everything works fine on a fresh install.
 
 > **Tested on:** Ubuntu 26.04 LTS (Resolute Raccoon) — GNOME 50 / Wayland
 > **Last updated:** September 2026
@@ -33,7 +33,7 @@ sudo apt autoclean
 
 ---
 
-## 📦 Install Favorite Apps
+## 📦 Install Favourite Apps
 ```bash
 sudo apt install obs-studio vlc gimp gparted synaptic -y
 ```
@@ -102,7 +102,7 @@ gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 
 ---
 
-## 🟢 Node.js via NVM
+## Node.js via NVM
 
 ### Install NVM (latest: v0.40.7)
 ```bash
@@ -134,11 +134,13 @@ node -v && npm -v
 ## 🎭 Install Theme
 https://www.gnome-look.org/p/1619506
 
-Create two folders in your home directory, press `Ctrl + H` to show hidden files, then create `.themes` & `.icons`:
+Create two folders in your home directory; press `Ctrl + H` to show hidden files, then create `.themes` & `.icons`:
 
 ```bash
 mkdir -p ~/.themes ~/.icons ~/.local/share/fonts
 ```
+
+![Home folder with .themes and .icons created](SetupHomeFolderThemesIcons.png)
 
 Extract downloaded themes into `~/.themes` and icons into `~/.icons`, then apply via **GNOME Tweaks → Appearance**.
 

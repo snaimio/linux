@@ -1,65 +1,76 @@
-# Linux Command for First-Time Setup
+<div align="center">
 
-## 📝 Why?
-Every time I install Linux, I have to repeat the same setup steps. Sometimes I forget one and have to redo the whole process. So I created this repository to make sure every fresh install is set up correctly.
+# 🐧 Linux Environment & Post-Installation Setup Suite
+### Comprehensive Ubuntu / Debian Post-Install Provisioning, Development Tooling & System Optimization Guide
 
-> **Tested on:** Ubuntu 26.04 LTS (Resolute Raccoon) — GNOME 50 / Wayland
-> **Last updated:** September 2026
+[![Linux](https://img.shields.io/badge/OS-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://www.kernel.org/)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-26.04%20LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com/)
+[![Bash](https://img.shields.io/badge/Shell-Bash%20%2F%20Zsh-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![Docker](https://img.shields.io/badge/Container-Docker%20CE-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-CEFF00?style=for-the-badge&logoColor=black)](LICENSE)
+
+<br/>
+
+**A curated, production-tested workstation setup guide and command-line reference for rapid system provisioning, desktop customization, security hardening, and developer toolchain configuration on modern Ubuntu/Debian distributions.**
+
+<br/>
+
+[System Updates](#-system-updates) •
+[Packages & Apps](#-essential-applications--system-tools) •
+[Developer Toolchain](#-developer-toolchains) •
+[GNOME Customization](#-gnome-tweaks--desktop-customization) •
+[Docker Setup](#-docker-engine--compose) •
+[License](#-license)
+
+</div>
+
+<br/>
+
+---
+
+## 📌 Overview
+
+This repository provides an automated, repeatable post-installation setup guide for configuring fresh Linux installations (tested on Ubuntu LTS / GNOME Wayland). It streamlines system updates, driver/codec installations, power management optimization, developer runtime provisioning, and desktop styling.
 
 ---
 
 ## 🔄 System Updates
 
-### Update package lists
+### Update & Upgrade System Packages
 ```bash
+# Update package indices
 sudo apt update
-```
 
-### Upgrade installed packages
-```bash
+# Upgrade installed packages
 sudo apt upgrade -y
-```
 
-### Full upgrade (handles dependencies + kernel)
-```bash
+# Full upgrade (handles new dependencies & kernel packages)
 sudo apt full-upgrade -y
-```
 
-### Clean up
-```bash
+# Remove orphaned dependencies & clear package cache
 sudo apt autoremove -y
 sudo apt autoclean
 ```
 
 ---
 
-## 📦 Install Favorite Apps
-```bash
-sudo apt install obs-studio vlc gimp gparted synaptic -y
-```
+## 📦 Essential Applications & System Tools
 
-### Install Ubuntu Restricted Extras
 ```bash
+# Core productivity & system utilities
+sudo apt install obs-studio vlc gimp gparted synaptic htop neofetch -y
+
+# Restricted media codecs & fonts
 sudo apt install ubuntu-restricted-extras -y
-```
 
-> **Note:** `ubuntu-restricted-extras` (version 68build1) is confirmed available in the Ubuntu 26.04 repositories.
-
-### Improve Laptop Battery
-```bash
+# Laptop battery optimization (TLP)
 sudo apt install tlp tlp-rdw -y
 sudo systemctl enable --now tlp
-```
 
-> **Note:** The `tlp` package is still current. `tlp-rdw` is a recommended add-on for radio device control.
+# Essential build toolchain & networking utilities
+sudo apt install build-essential git wget curl -y
 
-### Install Build Essentials & Common Tools
-```bash
-sudo apt install build-essential git wget curl htop neofetch -y
-```
-
-### Enable Firewall (UFW)
-```bash
+# Enable Uncomplicated Firewall (UFW)
 sudo apt install ufw -y
 sudo ufw enable
 sudo ufw status
@@ -67,99 +78,84 @@ sudo ufw status
 
 ---
 
-## 🛠️ Install Custom Software (.deb)
+## 🛠️ Installing Standalone `.deb` Packages
 
 ```bash
+# Install local deb package with automatic dependency resolution
 sudo apt install ./path/to/package.deb
 ```
 
-> **Important:** Use `apt install ./package.deb` (with `./`) instead of `dpkg -i`. This automatically handles dependencies and is the recommended method.
+> **Best Practice:** Use `apt install ./package.deb` (with `./`) rather than `dpkg -i` to automatically resolve and fetch missing upstream dependencies.
 
 ---
 
-## 🎨 Install GNOME Tweaks & Extensions
+## 🎨 GNOME Tweaks & Desktop Customization
+
 ```bash
+# Install GNOME management tools
 sudo apt install gnome-tweaks gnome-shell-extensions gnome-shell-extension-manager -y
 ```
 
-> ⚠️ **Note:** On Ubuntu 26.04 (Wayland), `Alt+F2 + r` no longer works. You must **log out and back in** for extension changes to apply.
-
-### Taskbar app click to minimize
+### Desktop Ergonomics Tweaks
 ```bash
+# Enable click-to-minimize on the dock
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
-```
 
-> ⚠️ **Known Bug:** On Ubuntu 26.04, there is a confirmed bug where clicking a freshly launched pinned app does not minimize on the first click. You must manually minimize the window once before the dock click action works correctly. This is a known issue in the Ubuntu Dock extension.
-
-### Show battery percentage
-```bash
+# Display battery percentage in top bar
 gsettings set org.gnome.desktop.interface show-battery-percentage true
-```
 
-### Enable tap-to-click (laptops)
-```bash
+# Enable touchpad tap-to-click
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 ```
 
----
-
-## 🟢 Node.js via NVM
-
-### Install NVM
+### Custom Themes & Icons
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.7/install.sh | bash
-```
-
-### Reload shell config
-```bash
-source ~/.bashrc
-```
-
-### Install Node.js
-```bash
-# Latest version
-nvm install node
-
-# LTS version
-nvm install --lts
-nvm use --lts
-
-# Verify
-node -v && npm -v
-```
-
----
-
-## 🎭 Install Theme
-https://www.gnome-look.org/p/1619506
-
-Create two folders in your home directory, press `Ctrl + H` to show hidden files, then create `.themes` & `.icons`:
-
-```bash
+# Create local styling directories
 mkdir -p ~/.themes ~/.icons ~/.local/share/fonts
 ```
 
 ![Home folder with .themes and .icons created](Setup-Home-Folder-Themes-Icons.png)
 
-Extract downloaded themes into `~/.themes` and icons into `~/.icons`, then apply via **GNOME Tweaks → Appearance**.
+> Extract downloaded themes into `~/.themes` and icons into `~/.icons`, then apply via **GNOME Tweaks → Appearance**.
 
 ---
 
-## 📦 Flatpak & Flathub
+## 📦 Flatpak & Flathub Integration
+
 ```bash
+# Install Flatpak engine & add Flathub repository
 sudo apt install flatpak -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
-> Reboot required after installing Flatpak for application launchers to recognize Flatpak apps.
+---
+
+## 🟢 Developer Toolchains
+
+### Node.js (via NVM)
+```bash
+# Install Node Version Manager (NVM)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.7/install.sh | bash
+
+# Reload shell configuration
+source ~/.bashrc
+
+# Install Node.js LTS release
+nvm install --lts
+nvm use --lts
+
+# Verify installation
+node -v && npm -v
+```
 
 ---
 
-## 🐳 Docker (Official Repository Method)
+## 🐳 Docker Engine & Compose
+
 ```bash
 # Add Docker's official GPG key
 sudo apt-get update
-sudo apt-get install ca-certificates curl
+sudo apt-get install ca-certificates curl -y
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -174,22 +170,24 @@ sudo apt-get update
 # Install Docker packages
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-# Add user to docker group
+# Add current user to docker group (non-root execution)
 sudo usermod -aG docker $USER
 ```
 
-> **Note:** Log out and back in for group changes to take effect. The convenience script (`curl -fsSL https://get.docker.com | sh`) is only recommended for testing and development environments. The official repository method is preferred for production.
+---
+
+## 🔧 Additional System Optimization
+
+| Purpose | Command |
+| :--- | :--- |
+| **Snap Package Support** | `sudo apt install snapd -y` |
+| **Secure Shell Server** | `sudo apt install openssh-server -y` |
+| **System Timezone** | `sudo timedatectl set-timezone America/Toronto` |
+| **Disk Space Analyzer** | `sudo apt install ncdu -y && ncdu /` |
+| **Zsh & Oh My Zsh** | `sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"` |
 
 ---
 
-## 🔧 Additional Recommendations
+## 📄 License
 
-| Task | Command |
-|------|---------|
-| Install Snap (if not present) | `sudo apt install snapd -y` |
-| Enable SSH server | `sudo apt install openssh-server -y` |
-| Set timezone | `sudo timedatectl set-timezone Region/City` |
-| Check disk usage | `df -h` or install `ncdu` |
-| Install Zsh + Oh My Zsh | `sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"` |
-
----
+This project is licensed under the [MIT License](LICENSE).
